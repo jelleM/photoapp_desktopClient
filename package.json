@@ -5,7 +5,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve",
+    "start": "ng serve --port 5000",
     "electron": "electron .",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
