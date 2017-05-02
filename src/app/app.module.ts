@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent }     from './app.component';
 import { ConnectComponent } from './connect/connect.component';
-import { StartEventComponent } from './start-event/start-event.component';
+import { EventComponent }   from './event/event.component';
 
 // Services
 import { ConnectionService } from './connect/connection.service';
@@ -17,7 +17,7 @@ import { ConnectionService } from './connect/connection.service';
   declarations: [
     AppComponent,
     ConnectComponent,
-    StartEventComponent
+    EventComponent
   ],
   imports: [
     BrowserModule,

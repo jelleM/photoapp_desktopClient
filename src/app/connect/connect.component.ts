@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import {ConnectMessage} from './ConnectMessage';
-import {ConnectionService} from './connection.service';
-import {Router} from '@angular/router';
+import { Component }         from '@angular/core';
+import { ConnectMessage }    from './ConnectMessage';
+import { ConnectionService } from './connection.service';
+import { Router }            from '@angular/router';
 
 @Component({
   selector: 'connect',
@@ -13,7 +13,7 @@ export class ConnectComponent {
 
   public messages: ConnectMessage = {errorMessage: '', succesMessage: ''};
 
-  constructor(private connectService: ConnectionService, private router: Router) {}
+  constructor(public connectService: ConnectionService, private router: Router) {}
 
   /**
    * Checks if the host and port are correctly filled in.
@@ -46,7 +46,7 @@ export class ConnectComponent {
   connectToServer(host, port) {
     if (this.allFieldsFilledIn(host, port)) {
       this.connectService.connectToServer(host, port).subscribe(() => { });
-      this.router.navigate(['/start-event']).then(() => { });
+      this.router.navigate(['/event']).then(() => { });
     }
   }
 
