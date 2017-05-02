@@ -2,7 +2,7 @@ import { Component }         from '@angular/core';
 import { ConnectionService } from '../connect/connection.service';
 
 @Component({
-  selector: 'start-event',
+  selector: 'event',
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })

@@ -29,6 +29,14 @@ export class ConnectionService {
         this.socket.on('connect', function(){
           console.log('Client is connected!');
         });
+
+        this.socket.on('overview-layout', function (ol) {
+          console.log('Received OverviewLayout: ' + JSON.stringify(ol));
+        });
+
+        this.socket.on('detail-layout', function (dl) {
+          console.log('Received DetailLayout: ' + JSON.stringify(dl));
+        });
       });
     });
   }

@@ -5,7 +5,7 @@ import { EventComponent }    from './event/event.component';
 
 export const routes: Routes = [
   {path: '', component: ConnectComponent},
-  {path: 'start-event', component: EventComponent},
+  {path: 'event', component: EventComponent},
   {path: '**', redirectTo: ''}
 ];
 
