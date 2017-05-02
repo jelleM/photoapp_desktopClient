@@ -7,7 +7,6 @@
   "scripts": {
     "start": "ng serve --port 5000",
     "electron": "electron .",
-    "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"
@@ -22,10 +21,12 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
+    "@types/socket.io-client": "^1.4.29",
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "rxjs": "^5.0.1",
     "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
   },
@@ -36,6 +37,8 @@
     "angular-cli": "1.0.0-beta.28.3",
     "codelyzer": "~2.0.0-beta.1",
     "devtron": "^1.4.0",
+    "electron-prebuilt": "^1.4.13",
+    "electron-reload": "^1.1.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
