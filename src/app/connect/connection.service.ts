@@ -11,6 +11,11 @@ export class ConnectionService {
 
   constructor(private zone: NgZone) { }
 
+  /**
+   * Connect to the socket.io server.
+   * @param host
+   * @param port
+   */
   public setServerAddress(host: string, port: string): void {
     this.host = host;
     this.port = port;
@@ -24,43 +29,6 @@ export class ConnectionService {
   public getPort(): string {
     return this.port;
   }
-
-  /**
-   * Connect to the server.
-   * @param host
-   * @param port
-   * @returns {Observable}
-   */
-  /*public connectToServer(host, port): Observable<any> {
-   return new Observable(o => {
-   this.host = host;
-   this.port = port;
-
-   this.socket = io(host + ':' + port);
-
-   // Socket.io callbacks need to be in constructor.
-   this.socket.on('connect', function () {
-   console.log('Client is connected!');
-   });
-
-   this.socket.on('overview-layout', function (ol) {
-   console.log('Received OverviewLayout: ' + JSON.stringify(ol));
-   });
-
-   this.socket.on('detail-layout', function (dl) {
-   console.log('Received DetailLayout: ' + JSON.stringify(dl));
-   });
-
-   this.socket.on('test-image', function (i) {
-   let zoneTwo: NgZone;
-   zoneTwo.run(() => {
-   this.imageAvailable = true;
-   this.imageUrl = i;
-   });
-   console.log('Received image: ' + i);
-   });
-   });
-   }*/
 
   public connectToServer(): Observable<any> {
     return new Observable(o => {

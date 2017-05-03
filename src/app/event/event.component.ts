@@ -10,6 +10,7 @@ import { Subscription }      from 'rxjs/Subscription';
 
 export class EventComponent implements OnInit, OnDestroy {
 
+  private connectionSubscription: Subscription;
   private overviewLayoutSubscription: Subscription;
   private detailLayoutSubscription: Subscription;
   private testImagesSubscription: Subscription;
@@ -18,11 +19,12 @@ export class EventComponent implements OnInit, OnDestroy {
   constructor(private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
+    this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => { });
+    this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe(() => { });
+    this.detailLayoutSubscription = this.connectionService.receiveDetailLayout().subscribe(() => { });
     this.testImagesSubscription = this.connectionService.receiveTestImages().subscribe(image => {
       this.images.push(image);
     });
-    this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe(() => { });
-    this.detailLayoutSubscription = this.connectionService.receiveDetailLayout().subscribe(() => { });
   }
 
   ngOnDestroy(): void {
