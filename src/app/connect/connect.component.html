@@ -23,7 +23,7 @@
     <button
       type="submit"
       class="btn btn-default"
-      (click)="connectToServer(host.value, port.value)">
+      (click)="setServerAddress(host.value, port.value); $event.preventDefault();">
       Connect
     </button>
 

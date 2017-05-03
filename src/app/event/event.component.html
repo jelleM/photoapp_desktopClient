@@ -1,1 +1,3 @@
-<p>{{this.connectionService.host}}:{{this.connectionService.port}}</p>
+<p>{{this.connectionService.getHost()}}:{{this.connectionService.getPort()}}</p>
+
+<img *ngFor="let i of images" src="{{i}}">

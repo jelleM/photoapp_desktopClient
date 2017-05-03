@@ -13,7 +13,7 @@ export class ConnectComponent {
 
   public messages: ConnectMessage = {errorMessage: '', succesMessage: ''};
 
-  constructor(public connectService: ConnectionService, private router: Router) {}
+  constructor(private connectionService: ConnectionService, private router: Router) {}
 
   /**
    * Checks if the host and port are correctly filled in.
@@ -43,11 +43,9 @@ export class ConnectComponent {
    * @param host
    * @param port
    */
-  connectToServer(host, port) {
-    if (this.allFieldsFilledIn(host, port)) {
-      this.connectService.connectToServer(host, port).subscribe(() => { });
-      this.router.navigate(['/event']).then(() => { });
-    }
+  public setServerAddress(host: string, port: string) {
+    this.connectionService.setServerAddress(host, port);
+    this.router.navigate(['/event']);
   }
 
 }
