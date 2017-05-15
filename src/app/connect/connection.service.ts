@@ -19,7 +19,7 @@ export class ConnectionService {
   public setServerAddress(host: string, port: string): void {
     this.host = host;
     this.port = port;
-    this.socket = io(host + ':' + port);
+    this.socket = io('http://' + host + ':' + port);
   }
 
   public getHost(): string {
@@ -69,16 +69,34 @@ export class ConnectionService {
     });
   }
 
-  public receiveTestImages(): Observable<any> {
+  public receiveImages(): Observable<any> {
     return new Observable(o => {
       this.socket.on('test-image', (image) => {
         o.next(image);
-        console.log('ConnectionService - receiveTestImages() - Image received!');
+        console.log('ConnectionService - receiveImages() - Image received!');
       });
       return () => {
         this.socket.disconnect();
-        console.log('ConnectionService - receiveTestImages() - Socket disconnected!');
+        console.log('ConnectionService - receiveImages() - Socket disconnected!');
       };
+    });
+  }
+
+  public privateMessage(): Observable<any> {
+    return new Observable(o => {
+      this.socket.on('private-message', (msg) => {
+        o.next(msg);
+        console.log('ConnectionService - privateMessage() - ' + msg);
+      });
+    });
+  }
+
+  public deletePhoto(): Observable<any> {
+    return new Observable(o => {
+      this.socket.on('delete-photo', (photoNumber) => {
+        o.next(photoNumber);
+        console.log('ConnectionService - deletePhoto() - ' + photoNumber);
+      });
     });
   }
 
