@@ -3,6 +3,7 @@ import {ConnectionService} from '../connect/connection.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Image} from '../model/Image';
 import {OverviewLayout} from "../model/layout/OverviewLayout";
+import {DetailLayout} from "../model/layout/DetailLayout";
 
 @Component({
   selector: 'event',
@@ -21,17 +22,23 @@ export class EventComponent implements OnInit, OnDestroy {
   private deleteImageSubscription: Subscription;
 
   private tempOverviewLayout: OverviewLayout = new OverviewLayout();
+  private tempDetailLayout: DetailLayout = new DetailLayout();
 
-  constructor(private connectionService: ConnectionService, private zone: NgZone) { }
+  constructor(private connectionService: ConnectionService, private zone: NgZone) {
+  }
 
   ngOnInit(): void {
-    this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => { });
+    this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => {
+    });
 
-    this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe(() => { });
+    this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe(() => {
+    });
 
-    this.detailLayoutSubscription = this.connectionService.receiveDetailLayout().subscribe(() => { });
+    this.detailLayoutSubscription = this.connectionService.receiveDetailLayout().subscribe(() => {
+    });
 
-    this.privateMessageSubscription = this.connectionService.privateMessage().subscribe(() => { });
+    this.privateMessageSubscription = this.connectionService.privateMessage().subscribe(() => {
+    });
 
     this.imagesSubscription = this.connectionService.receiveImages().subscribe(imageCode => {
       this.zone.run(() => {

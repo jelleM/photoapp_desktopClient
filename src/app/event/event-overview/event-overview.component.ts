@@ -1,7 +1,5 @@
-import {Component, Input, OnInit, OnChanges, SimpleChanges, DoCheck} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {OverviewLayout} from "../../model/layout/OverviewLayout";
-import {Position} from "../../model/layout/Position";
-import set = Reflect.set;
 import {Image} from "../../model/Image";
 
 @Component({
