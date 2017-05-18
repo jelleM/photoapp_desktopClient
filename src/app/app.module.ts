@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
+import {SwiperModule}     from "angular2-useful-swiper";
 
 // Components
 import {AppComponent} from './app.component';
@@ -12,22 +13,24 @@ import {EventComponent} from './event/event.component';
 
 // Services
 import {ConnectionService} from './connect/connection.service';
+import {EventDetailComponent} from "./event/event-detail/event-detail.component";
+import {EventOverviewComponent} from "./event/event-overview/event-overview.component";
 
-// Pipes
-import {SafeUrl} from './pipe/SafeUrl';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectComponent,
     EventComponent,
-    SafeUrl
+    EventOverviewComponent,
+    EventDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SwiperModule
   ],
   providers: [
     ConnectionService

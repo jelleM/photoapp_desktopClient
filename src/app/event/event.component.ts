@@ -2,6 +2,7 @@ import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ConnectionService} from '../connect/connection.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Image} from '../model/Image';
+import {OverviewLayout} from "../model/layout/OverviewLayout";
 
 @Component({
   selector: 'event',
@@ -17,7 +18,9 @@ export class EventComponent implements OnInit, OnDestroy {
   private privateMessageSubscription: Subscription;
   private imagesSubscription: Subscription;
   private images: Image[] = [];
-  private deletePhotoSubscription: Subscription;
+  private deleteImageSubscription: Subscription;
+
+  private tempOverviewLayout: OverviewLayout = new OverviewLayout();
 
   constructor(private connectionService: ConnectionService, private zone: NgZone) { }
 
@@ -40,7 +43,7 @@ export class EventComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.deletePhotoSubscription = this.connectionService.deleteImage().subscribe(photoNumber => {
+    this.deleteImageSubscription = this.connectionService.deleteImage().subscribe(photoNumber => {
       console.log('Deleting image with number ' + photoNumber + '!');
       const imageToDelete = this.images.find(image => image.imageNumber === photoNumber);
       if (imageToDelete !== null) {
@@ -55,7 +58,7 @@ export class EventComponent implements OnInit, OnDestroy {
     this.detailLayoutSubscription.unsubscribe();
     this.privateMessageSubscription.unsubscribe();
     this.imagesSubscription.unsubscribe();
-    this.deletePhotoSubscription.unsubscribe();
+    this.deleteImageSubscription.unsubscribe();
   }
 
 }

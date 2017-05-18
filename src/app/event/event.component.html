@@ -1,3 +1,1 @@
-<p>{{this.connectionService.getHost()}}:{{this.connectionService.getPort()}}</p>
-
-<img *ngFor="let i of images" [src]="i.imageBase64">
+<event-overview [images]="images" [overviewLayout]="tempOverviewLayout"></event-overview>
