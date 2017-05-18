@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { ConnectionService } from '../connect/connection.service';
-import { Subscription }      from 'rxjs/Subscription';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {ConnectionService} from '../connect/connection.service';
+import {Subscription} from 'rxjs/Subscription';
 import {Image} from '../model/Image';
 
 @Component({
@@ -19,22 +19,28 @@ export class EventComponent implements OnInit, OnDestroy {
   private images: Image[] = [];
   private deletePhotoSubscription: Subscription;
 
-  constructor(private connectionService: ConnectionService) { }
+  constructor(private connectionService: ConnectionService, private zone: NgZone) { }
 
   ngOnInit(): void {
     this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => { });
+
     this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe(() => { });
+
     this.detailLayoutSubscription = this.connectionService.receiveDetailLayout().subscribe(() => { });
+
     this.privateMessageSubscription = this.connectionService.privateMessage().subscribe(() => { });
+
     this.imagesSubscription = this.connectionService.receiveImages().subscribe(imageCode => {
-      const imageFields = imageCode.split('%%%');
-      const imageSource = imageFields[0];
-      const imageCount = imageFields[1];
-      const newImage: Image = new Image(imageCount, imageSource);
-      console.log('Image with number ' + newImage.imageNumber + ' has been added!');
-      this.images.push(newImage);
+      this.zone.run(() => {
+        const imageCount = imageCode.imageCount;
+        const imageSource = imageCode.imageBase;
+        const newImage: Image = new Image(imageCount, imageSource);
+        console.log('EventComponent - Received image with number: ' + imageCount + ' and source: ' + imageSource.substr(0, 10) + '...');
+        this.images.push(newImage);
+      });
     });
-    this.deletePhotoSubscription = this.connectionService.deletePhoto().subscribe(photoNumber => {
+
+    this.deletePhotoSubscription = this.connectionService.deleteImage().subscribe(photoNumber => {
       console.log('Deleting image with number ' + photoNumber + '!');
       const imageToDelete = this.images.find(image => image.imageNumber === photoNumber);
       if (imageToDelete !== null) {
@@ -44,7 +50,12 @@ export class EventComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.connectionSubscription.unsubscribe();
+    this.overviewLayoutSubscription.unsubscribe();
+    this.detailLayoutSubscription.unsubscribe();
+    this.privateMessageSubscription.unsubscribe();
     this.imagesSubscription.unsubscribe();
+    this.deletePhotoSubscription.unsubscribe();
   }
 
 }

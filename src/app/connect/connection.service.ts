@@ -1,6 +1,6 @@
 import {Injectable, NgZone} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import * as io        from 'socket.io-client';
+import * as io from 'socket.io-client';
 
 @Injectable()
 export class ConnectionService {
@@ -36,10 +36,6 @@ export class ConnectionService {
         o.next(message);
         console.log('ConnectionService - connect() - Client is connected!');
       });
-      return () => {
-        this.socket.disconnect();
-        console.log('ConnectionService - connect() - Socket disconnected!');
-      };
     });
   }
 
@@ -49,10 +45,6 @@ export class ConnectionService {
         o.next(overviewLayout);
         console.log('ConnectionService - receiveOverviewLayout() - OverviewLayout received!');
       });
-      return () => {
-        this.socket.disconnect();
-        console.log('ConnectionService - receiveOverviewLayout() - Socket disconnected!');
-      };
     });
   }
 
@@ -62,23 +54,15 @@ export class ConnectionService {
         o.next(detailLayout);
         console.log('ConnectionService - receiveDetailLayout() - DetailLayout received!');
       });
-      return () => {
-        this.socket.disconnect();
-        console.log('ConnectionService - receiveDetailLayout() - Socket disconnected!');
-      };
     });
   }
 
   public receiveImages(): Observable<any> {
     return new Observable(o => {
-      this.socket.on('test-image', (image) => {
+      this.socket.on('image', (image) => {
         o.next(image);
         console.log('ConnectionService - receiveImages() - Image received!');
       });
-      return () => {
-        this.socket.disconnect();
-        console.log('ConnectionService - receiveImages() - Socket disconnected!');
-      };
     });
   }
 
@@ -91,11 +75,11 @@ export class ConnectionService {
     });
   }
 
-  public deletePhoto(): Observable<any> {
+  public deleteImage(): Observable<any> {
     return new Observable(o => {
-      this.socket.on('delete-photo', (photoNumber) => {
-        o.next(photoNumber);
-        console.log('ConnectionService - deletePhoto() - ' + photoNumber);
+      this.socket.on('delete-image', (imageNumber) => {
+        o.next(imageNumber);
+        console.log('ConnectionService - deleteImage() - ' + imageNumber);
       });
     });
   }
