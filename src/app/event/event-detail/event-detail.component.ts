@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {DetailLayout} from "../../model/layout/DetailLayout";
 import {Image} from "../../model/Image";
 
@@ -12,6 +12,7 @@ export class EventDetailComponent implements OnInit {
   @Input() detailLayout: DetailLayout;
   @Input() isFullScreen: boolean;
   @Input() images: Image[];
+  @Output() goToEventOverview: EventEmitter<any> = new EventEmitter();
   private selectedImage: Image;
 
   private config: Object = {
@@ -144,5 +145,21 @@ export class EventDetailComponent implements OnInit {
   selectImage(img: Image) {
     this.selectedImage = img;
     console.log(this.selectedImage.imageNumber);
+  }
+
+  /**
+   * Click back button and go back to event-overview
+   */
+
+  clickBackBtn() {
+    this.goToEventOverview.emit(true);
+  }
+
+  /**
+   * Click finish button and go back to event-overview
+   */
+
+  clickFinishBtn() {
+    this.goToEventOverview.emit(true);
   }
 }

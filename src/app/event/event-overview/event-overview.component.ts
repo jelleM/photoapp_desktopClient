@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, Output, EventEmitter} from "@angular/core";
 import {OverviewLayout} from "../../model/layout/OverviewLayout";
 import {Image} from "../../model/Image";
 
@@ -11,7 +11,9 @@ import {Image} from "../../model/Image";
 export class EventOverviewComponent implements OnInit {
   @Input() overviewLayout: OverviewLayout;
   @Input() images: Image[];
+  @Output() goToEventDetail: EventEmitter<boolean> = new EventEmitter();
   private selectedImages: Image[] = [];
+  @Output() selectedImagesEmitter: EventEmitter<Image[]> = new EventEmitter();
 
   /**
    * Configuration of carousel
@@ -134,11 +136,19 @@ export class EventOverviewComponent implements OnInit {
    * Choose image.
    */
   selectImage(img: Image) {
-    if(this.selectedImages.indexOf(img) > -1){
+    if (this.selectedImages.indexOf(img) > -1) {
       this.selectedImages = this.selectedImages.filter(x => x.imageNumber != img.imageNumber);
-    }else{
+    } else {
       this.selectedImages.push(img);
     }
     console.log(this.selectedImages);
+  }
+
+  /**
+   * Click the select button and go to event-detail.
+   */
+  clickSelectBtn() {
+    this.selectedImagesEmitter.emit(this.selectedImages);
+    this.goToEventDetail.emit(true);
   }
 }

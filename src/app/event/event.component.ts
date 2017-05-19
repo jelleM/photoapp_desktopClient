@@ -24,6 +24,9 @@ export class EventComponent implements OnInit, OnDestroy {
   private tempOverviewLayout: OverviewLayout = new OverviewLayout();
   private tempDetailLayout: DetailLayout = new DetailLayout();
 
+  private selectedImages: Image[] = [];
+  private eventOverviewIsShowed: boolean = true;
+
   constructor(private connectionService: ConnectionService, private zone: NgZone) {
   }
 
@@ -66,6 +69,22 @@ export class EventComponent implements OnInit, OnDestroy {
     this.privateMessageSubscription.unsubscribe();
     this.imagesSubscription.unsubscribe();
     this.deleteImageSubscription.unsubscribe();
+  }
+
+  /**
+   * Do actions based on events emitted by event-detail or event-overview.
+   */
+
+  showEventDetail(evt) {
+    this.eventOverviewIsShowed = false;
+  }
+
+  showEventOverview(evt) {
+    this.eventOverviewIsShowed = true;
+  }
+
+  setSelectedImages(evt) {
+    this.selectedImages = evt;
   }
 
 }

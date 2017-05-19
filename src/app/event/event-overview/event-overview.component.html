@@ -32,7 +32,7 @@
   <img *ngIf="overviewLayout != null && overviewLayout.selectBtnImage != null" class="select-btn"
        src="{{overviewLayout.selectBtnImage}}">
   <button *ngIf="overviewLayout != null && overviewLayout.selectBtnImage == null" class="btn btn-default select-btn"
-          [ngStyle]="setSelectButton()">{{overviewLayout.selectBtnText}}
+          [ngStyle]="setSelectButton()" (click)="clickSelectBtn()">{{overviewLayout.selectBtnText}}
   </button>
 </footer>
 

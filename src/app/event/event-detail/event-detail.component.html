@@ -32,19 +32,20 @@
     </div>
     <div class="printMessageAndQr">
       <div class="printMessage" [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}"
-           [ngStyle]="setPrintMessage()">{{detailLayout.printMessageText}}</div>
+           [ngStyle]="setPrintMessage()">{{detailLayout.printMessageText}}
+      </div>
       <div class="qr" [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}"></div>
     </div>
     <div class="backAndFinish">
       <img *ngIf="detailLayout != null && detailLayout.backBtnImage != null" class="detail-button"
            src="{{detailLayout.backBtnImage}}">
       <button *ngIf="detailLayout != null && detailLayout.backBtnImage == null" class="btn btn-default"
-              [ngStyle]="setBackButton()">{{detailLayout.backBtnText}}
+              [ngStyle]="setBackButton()" (click)="clickBackBtn()">{{detailLayout.backBtnText}}
       </button>
       <img *ngIf="detailLayout != null && detailLayout.finishBtnImage != null" class="detail-button"
            src="{{detailLayout.finishBtnImage}}">
       <button *ngIf="detailLayout != null && detailLayout.finishBtnImage == null" class="btn btn-default"
-              [ngStyle]="setFinishButton()">{{detailLayout.finishBtnText}}
+              [ngStyle]="setFinishButton()" (click)="clickFinishBtn()">{{detailLayout.finishBtnText}}
       </button>
     </div>
   </div>
