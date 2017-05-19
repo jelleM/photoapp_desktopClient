@@ -16,6 +16,8 @@ export class EventDetailComponent implements OnInit {
 
   private selectedImage: Image;
 
+  private isPrinted: boolean = false;
+
   private config: Object = {
     slidesPerView: 3,
     spaceBetween: 5
@@ -153,6 +155,7 @@ export class EventDetailComponent implements OnInit {
    */
 
   clickBackBtn() {
+    this.isPrinted = false;
     this.goToEventOverview.emit(true);
   }
 
@@ -161,6 +164,17 @@ export class EventDetailComponent implements OnInit {
    */
 
   clickFinishBtn() {
+    this.isPrinted = false;
     this.goToEventOverview.emit(false);
+  }
+
+
+
+  /**
+   * Display print-message
+   */
+
+  showPrintMessage(){
+    this.isPrinted = true;
   }
 }

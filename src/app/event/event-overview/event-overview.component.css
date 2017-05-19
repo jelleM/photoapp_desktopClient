@@ -102,6 +102,10 @@ footer {
   max-height: 50%;
 }
 
+.swiper-pagination {
+/* bottom: -3rem;*/
+}
+
 .hide-pagination {
   display: none;
 }
