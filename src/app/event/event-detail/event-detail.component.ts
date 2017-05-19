@@ -13,6 +13,7 @@ export class EventDetailComponent implements OnInit {
   @Input() isFullScreen: boolean;
   @Input() images: Image[];
   @Output() goToEventOverview: EventEmitter<any> = new EventEmitter();
+
   private selectedImage: Image;
 
   private config: Object = {
@@ -160,6 +161,6 @@ export class EventDetailComponent implements OnInit {
    */
 
   clickFinishBtn() {
-    this.goToEventOverview.emit(true);
+    this.goToEventOverview.emit(false);
   }
 }

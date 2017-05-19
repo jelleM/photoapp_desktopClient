@@ -76,10 +76,15 @@ export class EventComponent implements OnInit, OnDestroy {
    */
 
   showEventDetail(evt) {
-    this.eventOverviewIsShowed = false;
+    if (this.selectedImages.length > 0) {
+      this.eventOverviewIsShowed = false;
+    }
   }
 
   showEventOverview(evt) {
+    if (!evt) {
+      this.selectedImages = [];
+    }
     this.eventOverviewIsShowed = true;
   }
 

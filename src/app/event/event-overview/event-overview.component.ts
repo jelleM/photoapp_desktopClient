@@ -12,7 +12,9 @@ export class EventOverviewComponent implements OnInit {
   @Input() overviewLayout: OverviewLayout;
   @Input() images: Image[];
   @Output() goToEventDetail: EventEmitter<boolean> = new EventEmitter();
+
   private selectedImages: Image[] = [];
+  @Input() savedSelectedImages: Image[] = [];
   @Output() selectedImagesEmitter: EventEmitter<Image[]> = new EventEmitter();
 
   /**
@@ -36,7 +38,9 @@ export class EventOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    if (this.savedSelectedImages != null) {
+      this.selectedImages = this.savedSelectedImages;
+    }
   }
 
   /**
