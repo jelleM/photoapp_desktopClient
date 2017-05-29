@@ -176,7 +176,9 @@ export class EventDetailComponent implements OnInit {
    */
 
   PrintImages() {
-    this.eventService.sendPrintImages(this.images);
-    this.isPrinted = true;
+    if (this.images != null) {
+      this.eventService.sendPrintImages(this.images);
+      this.isPrinted = true;
+    }
   }
 }

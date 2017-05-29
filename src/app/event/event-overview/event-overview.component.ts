@@ -40,6 +40,7 @@ export class EventOverviewComponent implements OnInit {
   ngOnInit(): void {
     if (this.savedSelectedImages != null) {
       this.selectedImages = this.savedSelectedImages;
+      console.log(this.images);
     }
   }
 

@@ -4,7 +4,7 @@ import {ConnectionService} from "../connect/connection.service";
 import {Image} from "../model/Image";
 
 @Injectable()
-export class EventService implements OnInit {
+export class EventService {
 
   private host: string;
   private port: string;
@@ -13,11 +13,9 @@ export class EventService implements OnInit {
   constructor(private zone: NgZone, private connectionService: ConnectionService) {
   }
 
-  ngOnInit(): void {
-    this.socket = io('http://' + this.connectionService.getHost() + ':' + this.connectionService.getPort());
-  }
 
   public sendPrintImages(images: Image[]) {
+    this.socket = io('http://' + this.connectionService.getHost() + ':' + this.connectionService.getPort());
     this.socket.emit('print', images.map(x => x.imageNumber), (() => console.log('print images sent!')));
   }
 }
