@@ -32,7 +32,8 @@ export class EventComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => { });
+    this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => {
+    });
 
     this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe((ol) => {
       console.log('OverviewLayout: ');
@@ -44,7 +45,8 @@ export class EventComponent implements OnInit, OnDestroy {
       console.log(dl);
     });
 
-    this.privateMessageSubscription = this.connectionService.privateMessage().subscribe(() => { });
+    this.privateMessageSubscription = this.connectionService.privateMessage().subscribe(() => {
+    });
 
     this.imagesSubscription = this.connectionService.receiveImages().subscribe(imageCode => {
       this.zone.run(() => {
@@ -66,22 +68,25 @@ export class EventComponent implements OnInit, OnDestroy {
     this.deleteImageSubscription = this.connectionService.deleteImage().subscribe(photoNumber => {
       this.zone.run(() => {
         console.log('Deleting image with number ' + photoNumber + '!');
-        const index: number = this.images.findIndex(image => image.imageNumber === parseInt(photoNumber));
-        this.images.splice(index, 1);
+        this.images = this.images.filter(x => x.imageNumber !== photoNumber);
+
+        if (this.selectedImages.length > 0) {
+          this.selectedImages = this.selectedImages.filter(x => x.imageNumber !== photoNumber);
+        }
       });
     });
   }
 
   private sortImages() {
     this.images.sort((a: Image, b: Image) => {
-     if (a.imageNumber < b.imageNumber) {
-     return 1;
-     } else if (a.imageNumber > b.imageNumber) {
-     return -1;
-     } else {
-     return 0;
-     }
-     });
+      if (a.imageNumber < b.imageNumber) {
+        return 1;
+      } else if (a.imageNumber > b.imageNumber) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   ngOnDestroy(): void {

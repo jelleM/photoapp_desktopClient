@@ -20,9 +20,9 @@
   <div class="photo-actions col-sm-7 col-xs-12">
     <div class="printAndShare">
       <img *ngIf="detailLayout != null && detailLayout.printBtnImage != null" class="detail-button"
-           src="{{detailLayout.printBtnImage}}" (click)="showPrintMessage()">
+           src="{{detailLayout.printBtnImage}}" (click)="PrintImages()">
       <button *ngIf="detailLayout != null && detailLayout.printBtnImage == null" class="btn btn-default"
-              [ngStyle]="setPrintButton()" (click)="showPrintMessage()">{{detailLayout.printBtnText}}
+              [ngStyle]="setPrintButton()" (click)="PrintImages()">{{detailLayout.printBtnText}}
       </button>
       <img *ngIf="detailLayout != null && detailLayout.shareBtnImage != null" class="detail-button"
            src="{{detailLayout.shareBtnImage}}">

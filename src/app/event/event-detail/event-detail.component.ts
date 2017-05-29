@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {DetailLayout} from "../../model/layout/DetailLayout";
 import {Image} from "../../model/Image";
+import {EventService} from "../event.service";
 
 @Component({
   selector: 'event-detail',
@@ -23,7 +24,7 @@ export class EventDetailComponent implements OnInit {
     spaceBetween: 5
   };
 
-  constructor() {
+  constructor(private eventService: EventService) {
 
   }
 
@@ -31,6 +32,7 @@ export class EventDetailComponent implements OnInit {
     if (this.images.length > 0) {
       this.selectedImage = this.images[0];
     }
+
   }
 
   /**
@@ -169,12 +171,12 @@ export class EventDetailComponent implements OnInit {
   }
 
 
-
   /**
-   * Display print-message
+   * Send the images to print and display the print message.
    */
 
-  showPrintMessage(){
+  PrintImages() {
+    this.eventService.sendPrintImages(this.images);
     this.isPrinted = true;
   }
 }
