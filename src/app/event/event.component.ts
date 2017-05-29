@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {Image} from '../model/Image';
 import {OverviewLayout} from '../model/layout/OverviewLayout';
 import {DetailLayout} from '../model/layout/DetailLayout';
-import {isUndefined} from "util";
+import {isUndefined} from 'util';
 
 @Component({
   selector: 'event',
@@ -18,6 +18,8 @@ export class EventComponent implements OnInit, OnDestroy {
   private overviewLayoutSubscription: Subscription;
   private detailLayoutSubscription: Subscription;
   private privateMessageSubscription: Subscription;
+  private eventIdSubscription: Subscription;
+  private eventId: number;
   private imagesSubscription: Subscription;
   private images: Image[] = [];
   private deleteImageSubscription: Subscription;
@@ -33,6 +35,13 @@ export class EventComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.connectionSubscription = this.connectionService.connectToServer().subscribe(() => {
+    });
+
+    this.eventIdSubscription = this.connectionService.receiveEventId().subscribe((id) => {
+      console.log('EventId: ' + id);
+      this.zone.run(() => {
+        this.eventId = id;
+      });
     });
 
     this.overviewLayoutSubscription = this.connectionService.receiveOverviewLayout().subscribe((ol) => {

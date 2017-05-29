@@ -39,6 +39,15 @@ export class ConnectionService {
     });
   }
 
+  public receiveEventId(): Observable<any> {
+    return new Observable(o => {
+      this.socket.on('event-id', (id) => {
+        o.next(id);
+        console.log('ConnectionService - receiveEventId() - Client is connected!');
+      });
+    });
+  }
+
   public receiveOverviewLayout(): Observable<any> {
     return new Observable(o => {
       this.socket.on('overview-layout', (overviewLayout) => {
@@ -82,6 +91,15 @@ export class ConnectionService {
         console.log('ConnectionService - deleteImage() - ' + imageNumber);
       });
     });
+  }
+
+  /**
+   * Send the image number to the server for printing.
+   * @param images
+   */
+  public printImages(images): void {
+    this.socket.emit('print', images.map(i => i.imageNumber));
+    console.log('Printing selected images!');
   }
 
 }

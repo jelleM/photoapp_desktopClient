@@ -18,8 +18,6 @@ import {EventOverviewComponent} from './event/event-overview/event-overview.comp
 
 // Pipes
 import {ImageSortPipe} from './pipe/ImageSort';
-import {EventService} from "./event/event.service";
-
 
 @NgModule({
   declarations: [
@@ -38,8 +36,7 @@ import {EventService} from "./event/event.service";
     SwiperModule
   ],
   providers: [
-    ConnectionService,
-    EventService
+    ConnectionService
   ],
   bootstrap: [
     AppComponent
