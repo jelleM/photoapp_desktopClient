@@ -1,10 +1,11 @@
 // Modules
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import {SwiperModule}     from 'angular2-useful-swiper';
+import { QRCodeModule } from 'angular2-qrcode';
 
 // Components
 import {AppComponent} from './app.component';
@@ -33,14 +34,16 @@ import {ImageSortPipe} from './pipe/ImageSort';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SwiperModule
+    SwiperModule,
+    QRCodeModule
   ],
   providers: [
     ConnectionService
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule {

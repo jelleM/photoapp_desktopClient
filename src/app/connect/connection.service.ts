@@ -43,7 +43,7 @@ export class ConnectionService {
     return new Observable(o => {
       this.socket.on('event-id', (id) => {
         o.next(id);
-        console.log('ConnectionService - receiveEventId() - Client is connected!');
+        console.log('ConnectionService - receiveEventId() - EventId received!' +id);
       });
     });
   }

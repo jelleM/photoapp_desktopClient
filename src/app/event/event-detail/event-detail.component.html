@@ -37,6 +37,9 @@
       </div>
       <div class="qr" [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}"></div>
     </div>
+    <div>
+      <qr-code [value]="qrCode" [size]="250" [level]="'H'"></qr-code>
+    </div>
     <div class="backAndFinish">
       <img *ngIf="detailLayout != null && detailLayout.backBtnImage != null" class="detail-button"
            src="{{detailLayout.backBtnImage}}">

@@ -19,7 +19,7 @@ export class EventComponent implements OnInit, OnDestroy {
   private detailLayoutSubscription: Subscription;
   private privateMessageSubscription: Subscription;
   private eventIdSubscription: Subscription;
-  private eventId: number;
+  private eventId: string;
   private imagesSubscription: Subscription;
   private images: Image[] = [];
   private deleteImageSubscription: Subscription;

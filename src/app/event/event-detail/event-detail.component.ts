@@ -1,23 +1,28 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {DetailLayout} from "../../model/layout/DetailLayout";
 import {Image} from "../../model/Image";
+import {QRCodeComponent} from 'angular2-qrcode';
 import {ConnectionService} from '../../connect/connection.service';
 
 @Component({
   selector: 'event-detail',
   templateUrl: 'event-detail.component.html',
-  styleUrls: ['event-detail.component.css']
+  styleUrls: ['event-detail.component.css'],
+  entryComponents:[QRCodeComponent]
 })
 
 export class EventDetailComponent implements OnInit {
   @Input() detailLayout: DetailLayout;
   @Input() isFullScreen: boolean;
   @Input() images: Image[];
+  @Input() eventId: string;
   @Output() goToEventOverview: EventEmitter<any> = new EventEmitter();
 
   private selectedImage: Image;
 
   private isPrinted: boolean = false;
+
+  private qrCode: string;
 
   private config: Object = {
     slidesPerView: 3,
@@ -32,7 +37,13 @@ export class EventDetailComponent implements OnInit {
     if (this.images.length > 0) {
       this.selectedImage = this.images[0];
     }
-
+    /**
+     *  Generate the QR-Code link.
+     */
+    this.qrCode = 'https://photoapp-share.herokuapp.com/photo?eventId='+this.eventId;
+    for(var image of this.images){
+      this.qrCode = this.qrCode+'&photo='+image.imageNumber;
+    }
   }
 
   /**

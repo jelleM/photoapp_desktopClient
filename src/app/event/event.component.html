@@ -1,5 +1,5 @@
 <event-overview *ngIf="eventOverviewIsShowed" [images]="images" [overviewLayout]="tempOverviewLayout" [savedSelectedImages]="selectedImages"
                 (goToEventDetail)="showEventDetail($event)"
                 (selectedImagesEmitter)="setSelectedImages($event)"></event-overview>
-<event-detail *ngIf="!eventOverviewIsShowed" [isFullScreen]="true" [images]="selectedImages" [detailLayout]="tempDetailLayout"
+<event-detail *ngIf="!eventOverviewIsShowed" [isFullScreen]="true" [images]="selectedImages" [detailLayout]="tempDetailLayout" [eventId]="eventId"
               (goToEventOverview)="showEventOverview($event)"></event-detail>
