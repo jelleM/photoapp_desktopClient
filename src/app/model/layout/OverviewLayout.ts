@@ -5,11 +5,13 @@ export class OverviewLayout extends Layout {
   imageContainerColor: string;
   imageContainerBorderColor: string;
   imageContainerBorderWidth: number;
+
   selectionIcon: string;
   selectionContainer: boolean;
   selectionContainerColor: string;
   selectionContainerBorderColor: string;
   selectionContainerBorderWidth: number;
+
   selectBtnText: string;
   selectBtnColor: string;
   selectBtnImage: string;
@@ -23,6 +25,7 @@ export class OverviewLayout extends Layout {
     this.imageContainerBorderColor = '#ffffff';
     this.imageContainerBorderWidth = 0;
 
+    this.selectionIcon = '';
     this.selectionContainer = true;
     this.selectionContainerColor = '#ffffff';
     this.selectionContainerBorderColor = '#ffffff';
@@ -30,6 +33,7 @@ export class OverviewLayout extends Layout {
 
     this.selectBtnText = 'Select';
     this.selectBtnColor = '#ffffff';
+    this.selectBtnImage = '';
     this.selectBtnBorderColor = '#4d4d4d';
     this.selectBtnBorderWidth = 1;
   }
