@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import {DetailLayout} from "../../model/layout/DetailLayout";
-import {Image} from "../../model/Image";
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {DetailLayout} from '../../model/layout/DetailLayout';
+import {Image} from '../../model/Image';
 import {QRCodeComponent} from 'angular2-qrcode';
 import {ConnectionService} from '../../connect/connection.service';
 
@@ -8,7 +8,7 @@ import {ConnectionService} from '../../connect/connection.service';
   selector: 'event-detail',
   templateUrl: 'event-detail.component.html',
   styleUrls: ['event-detail.component.css'],
-  entryComponents:[QRCodeComponent]
+  entryComponents: [QRCodeComponent]
 })
 
 export class EventDetailComponent implements OnInit {
@@ -20,7 +20,7 @@ export class EventDetailComponent implements OnInit {
 
   private selectedImage: Image;
 
-  private isPrinted: boolean = false;
+  private isPrinted = false;
 
   private qrCode: string;
 
@@ -40,9 +40,9 @@ export class EventDetailComponent implements OnInit {
     /**
      *  Generate the QR-Code link.
      */
-    this.qrCode = 'https://photoapp-share.herokuapp.com/photo?eventId='+this.eventId;
-    for(var image of this.images){
-      this.qrCode = this.qrCode+'&photo='+image.imageNumber;
+    this.qrCode = 'https://photoapp-share.herokuapp.com/photo?eventId=' + this.eventId;
+    for (let image of this.images){
+      this.qrCode = this.qrCode + '&photo=' + image.imageNumber;
     }
   }
 
@@ -51,8 +51,8 @@ export class EventDetailComponent implements OnInit {
    */
   private exitCounter = 0;
   private timer;
-  private visibleAnimate: boolean = false;  // necessary for activating bootstrap modal in Typescript code.
-  private visible: boolean = false;         // necessary for activating bootstrap modal in Typescript code.
+  private visibleAnimate = false;  // necessary for activating bootstrap modal in Typescript code.
+  private visible = false;         // necessary for activating bootstrap modal in Typescript code.
 
   showMenuLeftBtn() {
     this.exitCounter++;
@@ -80,9 +80,9 @@ export class EventDetailComponent implements OnInit {
     if (this.detailLayout != null) {
       return {
         'border': this.detailLayout.imageBorderWidth + 'px solid ' + this.detailLayout.imageBorderColor
-      }
+      };
     } else {
-      return {'border': 'none'}
+      return {'border': 'none'};
     }
   }
 
@@ -92,9 +92,9 @@ export class EventDetailComponent implements OnInit {
         'background': this.detailLayout.printBtnColor,
         'border': this.detailLayout.printBtnBorderWidth + 'px solid ' + this.detailLayout.printBtnBorderColor,
         'color': this.detailLayout.printBtnBorderColor
-      }
+      };
     } else {
-      return {'background': 'none', 'border': 'none'}
+      return {'background': 'none', 'border': 'none'};
     }
   }
 
@@ -105,9 +105,9 @@ export class EventDetailComponent implements OnInit {
         'border': this.detailLayout.shareBtnBorderWidth + 'px solid ' + this.detailLayout.shareBtnBorderColor,
         'color': this.detailLayout.shareBtnBorderColor
 
-      }
+      };
     } else {
-      return {'background': 'none', 'border': 'none'}
+      return {'background': 'none', 'border': 'none'};
     }
   }
 
@@ -117,9 +117,9 @@ export class EventDetailComponent implements OnInit {
         'background': this.detailLayout.backBtnColor,
         'border': this.detailLayout.backBtnBorderWidth + 'px solid ' + this.detailLayout.backBtnBorderColor,
         'color': this.detailLayout.backBtnBorderColor
-      }
+      };
     } else {
-      return {'background': 'none', 'border': 'none'}
+      return {'background': 'none', 'border': 'none'};
     }
   }
 
@@ -129,9 +129,9 @@ export class EventDetailComponent implements OnInit {
         'background': this.detailLayout.finishBtnColor,
         'border': this.detailLayout.finishBtnBorderWidth + 'px solid ' + this.detailLayout.finishBtnBorderColor,
         'color': this.detailLayout.finishBtnBorderColor
-      }
+      };
     } else {
-      return {'background': 'none', 'border': 'none'}
+      return {'background': 'none', 'border': 'none'};
     }
   }
 
@@ -141,17 +141,21 @@ export class EventDetailComponent implements OnInit {
         'background': this.detailLayout.printMessageColor,
         'border': this.detailLayout.printMessageBorderWidth + 'px solid ' + this.detailLayout.printMessageBorderColor,
         'color': this.detailLayout.printMessageBorderColor
-      }
+      };
     } else {
-      return {'background': 'none', 'border': 'none'}
+      return {'background': 'none', 'border': 'none'};
     }
   }
 
-  setImagePosition(): any {
-    if (this.detailLayout.imagePosition == 0) {
-      return {'flex-direction': 'row'};
+  setImagePositionAndBackground(): any {
+    if ((this.detailLayout.imagePosition === 0) && (this.detailLayout.backgroundImage)) {
+      return {'flex-direction': 'row', 'background-image': 'url(' + this.detailLayout.backgroundImage + ')', 'background-repeat': 'round', 'background-size:': 'cover'};
+    } else if ((this.detailLayout.imagePosition === 0) && (!this.detailLayout.backgroundImage)) {
+      return {'flex-direction': 'row', 'background-color': this.detailLayout.backgroundColor};
+    } else if ((this.detailLayout.imagePosition !== 0) && (!this.detailLayout.backgroundImage)) {
+      return {'flex-direction': 'row-reverse', 'background-color': this.detailLayout.backgroundColor};
     } else {
-      return {'flex-direction': 'row-reverse'};
+      return {'flex-direction': 'row-reverse', 'background-image': 'url(' + this.detailLayout.backgroundImage + ')', 'background-repeat': 'round', 'background-size:': 'cover'};
     }
   }
 

@@ -1,7 +1,7 @@
 <div class="exit-btn" id="exit-btn-1" (click)="showMenuLeftBtn()"></div>
 <div class="exit-btn" id="exit-btn-2" (click)="showMenuRightBtn()"></div>
 
-<main class="row" [ngStyle]="setImagePosition()">
+<main class="row" [ngStyle]="setImagePositionAndBackground()">
   <div class="photos col-sm-5 col-xs-12">
     <div class="photo">
       <img src="{{selectedImage.imageBase64}}" [ngStyle]="setImageStyle()">

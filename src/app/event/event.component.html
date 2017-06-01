@@ -1,6 +1,6 @@
 <event-overview *ngIf="eventOverviewIsShowed"
                 [images]="images"
-                [ngStyle]="setBackground()"
+                [ngStyle]="setOverviewBackground()"
                 [overviewLayout]="overviewLayout"
                 [savedSelectedImages]="selectedImages"
                 (goToEventDetail)="showEventDetail($event)"
@@ -8,7 +8,7 @@
 <event-detail *ngIf="!eventOverviewIsShowed"
               [isFullScreen]="true"
               [images]="selectedImages"
-              [ngStyle]="setBackground()"
+              [ngStyle]="setDetailBackground()"
               [detailLayout]="detailLayout"
               [eventId]="eventId"
               (goToEventOverview)="showEventOverview($event)"></event-detail>

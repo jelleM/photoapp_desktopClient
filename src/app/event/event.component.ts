@@ -327,7 +327,7 @@ export class EventComponent implements OnInit, OnDestroy {
     if (!isUndefined(detailJSON.printMessageBorderWidth)) {
       this.detailLayout.printMessageBorderWidth = detailJSON.printMessageBorderWidth;
     }
-    if (!isUndefined(detailJSON.imagePosition)) {
+    /*if (!isUndefined(detailJSON.imagePosition)) {
       switch (detailJSON.imagePosition) {
         case 'LEFT':
           this.detailLayout.imagePosition = Position.LEFT;
@@ -339,15 +339,23 @@ export class EventComponent implements OnInit, OnDestroy {
           this.detailLayout.imagePosition = Position.RIGHT;
           break;
       }
-    }
+    }*/
   }
 
   // The styling of the background has to happen here, because it has to happen on the :host element
-  setBackground(): any {
+  public setOverviewBackground(): any {
     if (this.overviewLayout != null && this.overviewLayout.backgroundImage) {
-      return {'background-image': 'url(' + this.overviewLayout.backgroundImage + ')', 'background-cover': 'cover'}
+      return {'background-image': 'url(' + this.overviewLayout.backgroundImage + ')', 'background-repeat': 'round', 'background-size:': 'cover'};
     } else {
-      return {'background': this.overviewLayout.backgroundColor};
+      return {'background-color': this.overviewLayout.backgroundColor};
+    }
+  }
+
+  public setDetailBackground(): any {
+    if (this.detailLayout != null && this.detailLayout.backgroundImage) {
+      return {'background-image': 'url(' + this.detailLayout.backgroundImage + ')', 'background-cover': 'cover'};
+    } else {
+      return {'background-color': this.detailLayout.backgroundColor};
     }
   }
 
