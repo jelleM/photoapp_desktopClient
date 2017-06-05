@@ -6,17 +6,16 @@
 }
 
 .exit-btn {
-  width: 70px;
-  height: 70px;
   position: absolute;
-  top: 0;
+  height: 7%;
+  width: 10%;
 }
 
-#exit-btn-1 {
+#switch-btn-left {
   left: 0;
 }
 
-#exit-btn-2 {
+#switch-btn-right {
   right: 0;
 }
 

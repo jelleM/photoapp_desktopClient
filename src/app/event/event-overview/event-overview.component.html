@@ -1,5 +1,5 @@
-<div class="exit-btn" id="exit-btn-1" (click)="showMenuLeftBtn()"></div>
-<div class="exit-btn" id="exit-btn-2" (click)="showMenuRightBtn()"></div>
+<div class="exit-btn" id="switch-btn-left" (click)="switchLayoutLeftBtn()"></div>
+<div class="exit-btn" id="switch-btn-right" (click)="switchLayoutRightBtn()"></div>
 
 <header [ngStyle]="setLogo()">
   <img *ngIf="overviewLayout !== null && overviewLayout.logo !== null" class="logo" src="{{overviewLayout.logo}}">

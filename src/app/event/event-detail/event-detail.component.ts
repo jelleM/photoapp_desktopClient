@@ -24,6 +24,8 @@ export class EventDetailComponent implements OnInit {
 
   private qrCode: string;
 
+  private switched = false;
+
   private config: Object = {
     slidesPerView: 3,
     spaceBetween: 5
@@ -47,8 +49,42 @@ export class EventDetailComponent implements OnInit {
   }
 
   /**
-   * Functions to customize the layout style.
+   *  Show the menu on 3 clicks in left corner and 1 in the right corner.
    */
+  private exitCounter = 0;
+  private timer;
+
+  switchLayoutLeftBtn() {
+    this.exitCounter++;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.exitCounter = 0, 3000);
+  }
+
+  switchLayoutRightBtn() {
+    if (this.exitCounter >= 3) {
+      this.switched = !this.switched;
+    }
+  }
+
+  private setLeftSwitchButton(): any {
+    return {
+      'z-index': '10',
+      'position': 'absolute',
+      'left': '0',
+      'height': '7%',
+      'width': '10%'
+    };
+  }
+
+  private setRightSwitchButton(): any {
+    return {
+      'z-index': '10',
+      'position': 'absolute',
+      'right': '0',
+      'height': '7%',
+      'width': '10%'
+    };
+  }
 
   setImageStyle(): any {
     if (this.detailLayout != null) {
