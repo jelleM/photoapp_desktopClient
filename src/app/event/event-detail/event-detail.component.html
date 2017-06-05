@@ -1,6 +1,3 @@
-<div class="exit-btn" id="exit-btn-1" (click)="showMenuLeftBtn()"></div>
-<div class="exit-btn" id="exit-btn-2" (click)="showMenuRightBtn()"></div>
-
 <div class="container-fluid full-height" [ngStyle]="setImagePositionAndBackground()">
 
   <main class="full-height">
@@ -41,6 +38,7 @@
             <button *ngIf="detailLayout != null && detailLayout.printBtnImage === null"
                     class="btn btn-default"
                     [ngStyle]="setPrintButton()"
+                    [class.disabled]="isPrinted"
                     (click)="printImages()">{{detailLayout.printBtnText}}
             </button>
           </div>
