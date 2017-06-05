@@ -16,6 +16,7 @@ import {EventComponent} from './event/event.component';
 import {ConnectionService} from './connect/connection.service';
 import {EventDetailComponent} from './event/event-detail/event-detail.component';
 import {EventOverviewComponent} from './event/event-overview/event-overview.component';
+import {LayoutSwitchService} from './event/services/layout-switch.service';
 
 // Pipes
 import {ImageSortPipe} from './pipe/ImageSort';
@@ -38,7 +39,8 @@ import {ImageSortPipe} from './pipe/ImageSort';
     QRCodeModule
   ],
   providers: [
-    ConnectionService
+    ConnectionService,
+    LayoutSwitchService
   ],
   bootstrap: [
     AppComponent

@@ -7,14 +7,14 @@
 
     <div id="top-container" class="row">
       <div class="col-xs-9 full-height"
-           [ngClass]="{'col-xs-push-3': switched }">
+           [ngClass]="{'col-xs-push-3': layoutSwitchService.getSwitchState() }">
         <div id="selected-image">
           <img src="{{selectedImage.imageBase64}}" [ngStyle]="setImageStyle()">
         </div>
       </div>
 
       <div class="col-xs-3 full-height"
-           [ngClass]="{'col-xs-pull-9': switched }">
+           [ngClass]="{'col-xs-pull-9': layoutSwitchService.getSwitchState() }">
         <div id="image-actions">
           <div id="back">
             <img *ngIf="detailLayout != null && detailLayout.backBtnImage != null"
@@ -58,7 +58,7 @@
 
     <div id="bottom-container" class="row">
       <div class="col-xs-9"
-           [ngClass]="{'col-xs-push-3': switched }">
+           [ngClass]="{'col-xs-push-3': layoutSwitchService.getSwitchState() }">
         <swiper [config]="config">
           <div class="swiper-wrapper">
             <div class="swiper-slide" *ngFor="let img of images">
@@ -69,7 +69,7 @@
       </div>
 
       <div class="col-xs-3"
-           [ngClass]="{'col-xs-pull-9': switched }">
+           [ngClass]="{'col-xs-pull-9': layoutSwitchService.getSwitchState() }">
         <div id="qr">
           <qr-code [value]="qrCode" [size]="136" [level]="'H'"></qr-code>
         </div>

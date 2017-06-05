@@ -3,6 +3,7 @@ import {DetailLayout} from '../../model/layout/DetailLayout';
 import {Image} from '../../model/Image';
 import {QRCodeComponent} from 'angular2-qrcode';
 import {ConnectionService} from '../../connect/connection.service';
+import {LayoutSwitchService} from '../services/layout-switch.service';
 
 @Component({
   selector: 'event-detail',
@@ -24,15 +25,12 @@ export class EventDetailComponent implements OnInit {
 
   private qrCode: string;
 
-  private switched = false;
-
   private config: Object = {
     slidesPerView: 3,
     spaceBetween: 5
   };
 
-  constructor(private connectionService: ConnectionService) {
-
+  constructor(private connectionService: ConnectionService, private layoutSwitchService: LayoutSwitchService) {
   }
 
   ngOnInit(): void {
@@ -62,7 +60,7 @@ export class EventDetailComponent implements OnInit {
 
   switchLayoutRightBtn() {
     if (this.exitCounter >= 3) {
-      this.switched = !this.switched;
+      this.layoutSwitchService.toggleSwitched();
     }
   }
 
