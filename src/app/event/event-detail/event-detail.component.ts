@@ -41,35 +41,9 @@ export class EventDetailComponent implements OnInit {
      *  Generate the QR-Code link.
      */
     this.qrCode = 'https://photoapp-share.herokuapp.com/photo?eventId=' + this.eventId;
-    for (let image of this.images){
+    for (let image of this.images) {
       this.qrCode = this.qrCode + '&photo=' + image.imageNumber;
     }
-  }
-
-  /**
-   *  Show the menu on 3 clicks in left corner and 1 in the right corner.
-   */
-  private exitCounter = 0;
-  private timer;
-  private visibleAnimate = false;  // necessary for activating bootstrap modal in Typescript code.
-  private visible = false;         // necessary for activating bootstrap modal in Typescript code.
-
-  showMenuLeftBtn() {
-    this.exitCounter++;
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.exitCounter = 0, 3000);
-  }
-
-  showMenuRightBtn() {
-    if (this.exitCounter >= 3) {
-      this.visibleAnimate = true;
-      this.visible = true;
-    }
-  }
-
-  closeMenu() {
-    this.visibleAnimate = false;
-    this.visible = false;
   }
 
   /**
@@ -136,9 +110,13 @@ export class EventDetailComponent implements OnInit {
   }
 
   setPrintMessage(): any {
-    if (this.detailLayout != null && this.detailLayout.printMessageImage == null) {
+    if (this.detailLayout !== null && this.detailLayout.printMessageImage === null) {
       return {
-        'background': this.detailLayout.printMessageColor,
+        'display': 'flex',
+        'justify-content': 'center',
+        'flex-direction': 'column',
+        'text-align': 'center',
+        'background-color': this.detailLayout.printMessageColor,
         'border': this.detailLayout.printMessageBorderWidth + 'px solid ' + this.detailLayout.printMessageBorderColor,
         'color': this.detailLayout.printMessageBorderColor
       };
@@ -149,13 +127,23 @@ export class EventDetailComponent implements OnInit {
 
   setImagePositionAndBackground(): any {
     if ((this.detailLayout.imagePosition === 0) && (this.detailLayout.backgroundImage)) {
-      return {'flex-direction': 'row', 'background-image': 'url(' + this.detailLayout.backgroundImage + ')', 'background-repeat': 'round', 'background-size:': 'cover'};
+      return {
+        'flex-direction': 'row',
+        'background-image': 'url(' + this.detailLayout.backgroundImage + ')',
+        'background-repeat': 'round',
+        'background-size:': 'cover'
+      };
     } else if ((this.detailLayout.imagePosition === 0) && (!this.detailLayout.backgroundImage)) {
       return {'flex-direction': 'row', 'background-color': this.detailLayout.backgroundColor};
     } else if ((this.detailLayout.imagePosition !== 0) && (!this.detailLayout.backgroundImage)) {
       return {'flex-direction': 'row-reverse', 'background-color': this.detailLayout.backgroundColor};
     } else {
-      return {'flex-direction': 'row-reverse', 'background-image': 'url(' + this.detailLayout.backgroundImage + ')', 'background-repeat': 'round', 'background-size:': 'cover'};
+      return {
+        'flex-direction': 'row-reverse',
+        'background-image': 'url(' + this.detailLayout.backgroundImage + ')',
+        'background-repeat': 'round',
+        'background-size:': 'cover'
+      };
     }
   }
 
@@ -189,8 +177,7 @@ export class EventDetailComponent implements OnInit {
   /**
    * Send the images to print and display the print message.
    */
-
-  PrintImages() {
+  printImages() {
     if (this.images != null) {
       this.connectionService.printImages(this.images);
       this.isPrinted = true;

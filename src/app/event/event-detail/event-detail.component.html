@@ -1,57 +1,74 @@
 <div class="exit-btn" id="exit-btn-1" (click)="showMenuLeftBtn()"></div>
 <div class="exit-btn" id="exit-btn-2" (click)="showMenuRightBtn()"></div>
 
-<main class="row" [ngStyle]="setImagePositionAndBackground()">
-  <div class="photos col-sm-5 col-xs-12">
-    <div class="photo">
-      <img src="{{selectedImage.imageBase64}}" [ngStyle]="setImageStyle()">
-    </div>
-    <div class="photo-overview">
-      <swiper [config]="config">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" *ngFor="let img of images">
-            <img src="{{img.imageBase64}}" [ngStyle]="setImageStyle()" (click)="selectImage(img)">
+<div class="container-fluid full-height" [ngStyle]="setImagePositionAndBackground()">
+
+  <main class="full-height">
+    <div id="top-container" class="row">
+      <div class="col-xs-9 full-height">
+        <div id="selected-image">
+          <img src="{{selectedImage.imageBase64}}" [ngStyle]="setImageStyle()">
+        </div>
+      </div>
+
+      <div class="col-xs-3 full-height">
+        <div id="image-actions">
+          <div id="back">
+            <img *ngIf="detailLayout != null && detailLayout.backBtnImage != null"
+                 class="detail-button"
+                 src="{{detailLayout.backBtnImage}}">
+            <button *ngIf="detailLayout != null && detailLayout.backBtnImage == null"
+                    class="btn btn-default"
+                    [ngStyle]="setBackButton()"
+                    (click)="clickBackBtn()">{{detailLayout.backBtnText}}
+            </button>
+          </div>
+          <div id="finish">
+            <img *ngIf="detailLayout != null && detailLayout.finishBtnImage != null"
+                 class="detail-button"
+                 src="{{detailLayout.finishBtnImage}}">
+            <button *ngIf="detailLayout != null && detailLayout.finishBtnImage == null"
+                    class="btn btn-default"
+                    [ngStyle]="setFinishButton()"
+                    (click)="clickFinishBtn()">{{detailLayout.finishBtnText}}
+            </button>
+          </div>
+          <div id="print">
+            <img *ngIf="detailLayout != null && detailLayout.printBtnImage !== null"
+                 class="detail-button"
+                 src="{{detailLayout.printBtnImage}}"
+                 (click)="printImages()">
+            <button *ngIf="detailLayout != null && detailLayout.printBtnImage === null"
+                    class="btn btn-default"
+                    [ngStyle]="setPrintButton()"
+                    (click)="printImages()">{{detailLayout.printBtnText}}
+            </button>
+          </div>
+          <div id="print-message"
+               [ngClass]="{'show-message': isPrinted, 'hide-message': !isPrinted}"
+               [ngStyle]="setPrintMessage()">{{detailLayout.printMessageText}}
           </div>
         </div>
-      </swiper>
-    </div>
-  </div>
-
-  <div class="photo-actions col-sm-7 col-xs-12">
-    <div class="printAndShare">
-      <img *ngIf="detailLayout != null && detailLayout.printBtnImage != null" class="detail-button"
-           src="{{detailLayout.printBtnImage}}" (click)="PrintImages()">
-      <button *ngIf="detailLayout != null && detailLayout.printBtnImage == null" class="btn btn-default"
-              [ngStyle]="setPrintButton()" (click)="PrintImages()">{{detailLayout.printBtnText}}
-      </button>
-      <img *ngIf="detailLayout != null && detailLayout.shareBtnImage != null" class="detail-button"
-           src="{{detailLayout.shareBtnImage}}">
-      <button *ngIf="detailLayout != null && detailLayout.shareBtnImage == null" class="btn btn-default"
-              [ngStyle]="setShareButton()">{{detailLayout.shareBtnText}}
-      </button>
-    </div>
-    <div class="printMessageAndQr">
-      <div *ngIf="isPrinted" class="printMessage"
-           [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}"
-           [ngStyle]="setPrintMessage()">{{detailLayout.printMessageText}}
       </div>
-      <div class="qr" [ngClass]="{'full-screen': isFullScreen, 'small-screen': !isFullScreen}"></div>
     </div>
-    <div>
-      <qr-code [value]="qrCode" [size]="250" [level]="'H'"></qr-code>
-    </div>
-    <div class="backAndFinish">
-      <img *ngIf="detailLayout != null && detailLayout.backBtnImage != null" class="detail-button"
-           src="{{detailLayout.backBtnImage}}">
-      <button *ngIf="detailLayout != null && detailLayout.backBtnImage == null" class="btn btn-default"
-              [ngStyle]="setBackButton()" (click)="clickBackBtn()">{{detailLayout.backBtnText}}
-      </button>
-      <img *ngIf="detailLayout != null && detailLayout.finishBtnImage != null" class="detail-button"
-           src="{{detailLayout.finishBtnImage}}">
-      <button *ngIf="detailLayout != null && detailLayout.finishBtnImage == null" class="btn btn-default"
-              [ngStyle]="setFinishButton()" (click)="clickFinishBtn()">{{detailLayout.finishBtnText}}
-      </button>
-    </div>
-  </div>
 
-</main>
+    <div id="bottom-container" class="row">
+      <div class="col-xs-9">
+        <swiper [config]="config">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" *ngFor="let img of images">
+              <img src="{{img.imageBase64}}" [ngStyle]="setImageStyle()" (click)="selectImage(img)">
+            </div>
+          </div>
+        </swiper>
+      </div>
+
+      <div class="col-xs-3">
+        <div id="qr">
+          <qr-code [value]="qrCode" [size]="136" [level]="'H'"></qr-code>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
